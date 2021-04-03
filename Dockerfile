@@ -1,19 +1,19 @@
 FROM ruby:2.5.7
 
 RUN apt-get update -qq && \
-		apt-get install -y build-essential \
-                       libpq-dev \
-                       nodejs \
-                       vim
+apt-get install -y build-essential \
+									 libpq-dev \
+									 nodejs \
+									 default-mysql-client \
+									 vim
 
-RUN mkdir /myapp
+RUN mkdir /selenium_app
 
-WORKDIR /myapp
+WORKDIR /selenium_app
 
-COPY Gemfile /myapp/Gemfile
-COPY Gemfile.lock /myapp/Gemfile.lock
+COPY Gemfile /selenium_app/Gemfile
+COPY Gemfile.lock /selenium_app/Gemfile.lock
 
-RUN gem install bundler
 RUN bundle install
 
-COPY . /myapp
+COPY . /selenium_app
